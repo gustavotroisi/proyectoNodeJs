@@ -22,8 +22,8 @@ switch (args[0]) {
     break;
   case "POST":
     console.log("Se recibió un método POST");
-    const datos = [args[1], args[2], args[3]];
-    create_product(datos);
+    const product = { title: args[2], price: args[3], category: args[4] };
+    create_product(product);
     break;
   case "DELETE":
     console.log("Se recibió un método DELETE");
@@ -65,9 +65,17 @@ function get_product(id) {
     .then((data) => console.log(data));
 }
 
-function create_product(datos) {
+function create_product(product) {
   console.log("Crear producto");
-  console.log(datos);
+  console.log(product);
+
+  fetch("https://fakestoreapi.com/products", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
 
 function delete_product(id) {
