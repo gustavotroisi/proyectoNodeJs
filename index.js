@@ -53,10 +53,16 @@ switch (args[0]) {
 
 function get_products() {
   console.log("Obtener todos los productos");
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
 
 function get_product(id) {
   console.log(`Obtener el producto id ${id}`);
+  fetch(`https://fakestoreapi.com/products/${id}`)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
 
 function create_product(datos) {
@@ -66,4 +72,9 @@ function create_product(datos) {
 
 function delete_product(id) {
   console.log(`Eliminar producto ${id}`);
+  fetch(`https://fakestoreapi.com/products/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
