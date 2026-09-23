@@ -3,9 +3,9 @@ const args = process.argv.slice(2);
 switch (args[0]) {
   case "GET":
     console.log("Se recibió un método GET");
-    if (args[1] == "products") {
+    if (args[1] && args[1] == "products") {
       get_products();
-    } else if (args[1].indexOf("products/") == 0) {
+    } else if (args[1] && args[1].indexOf("products/") == 0) {
       const prod = args[1].split("/");
       if (prod[1]) {
         if (Number.isInteger(Number(prod[1]))) {
@@ -23,7 +23,11 @@ switch (args[0]) {
   case "POST":
     console.log("Se recibió un método POST");
     const product = { title: args[2], price: args[3], category: args[4] };
-    create_product(product);
+    if (args[1] && args[2] && args[3] && args[4]) {
+      create_product(product);
+    } else {
+      console.log("Faltan datos para el POST.");
+    }
     break;
   case "DELETE":
     console.log("Se recibió un método DELETE");
@@ -44,11 +48,11 @@ switch (args[0]) {
         console.log("El método ingresado es incorrecto.");
       }
     } else {
-      console.log("El método ingresado esta incompleto.");
+      console.log("El método DELETE esta incompleto.");
     }
     break;
   default:
-    console.log("El método ingresado es incorrecto.");
+    console.log("Falta enviar el metodo.");
 }
 
 function get_products() {
