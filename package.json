@@ -8,5 +8,5 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "type": "commonjs"
+  "type": "module"
 }
